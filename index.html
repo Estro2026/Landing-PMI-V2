@@ -2180,36 +2180,21 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
 }
 
 /* ═══ CLIENTI SHOWCASE ═══ */
-.clienti{background:var(--K2);padding:80px 0 96px;position:relative;overflow:hidden}
-.clienti::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(243,239,224,.022) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
-.cl-hdr{text-align:center;margin-bottom:48px;position:relative;z-index:1}
-.cl-eyebrow{font-size:11px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--F);display:block;margin-bottom:14px}
-.cl-title{font-family:var(--fd);font-size:clamp(26px,3vw,42px);color:var(--C);letter-spacing:-1.4px;line-height:1.06;margin:0}
-.cl-title em{font-style:normal;color:var(--F)}
-.cl-sub{font-size:15px;color:rgba(243,239,224,.48);margin-top:12px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.65}
-/* filter bar */
-.cl-filters{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:44px;position:relative;z-index:1}
-.cl-fbtn{padding:8px 20px;border-radius:100px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(243,239,224,.48);font-family:var(--fb);font-size:12.5px;font-weight:600;cursor:pointer;transition:all .24s cubic-bezier(.22,1,.36,1);letter-spacing:.2px;white-space:nowrap;outline:none}
-.cl-fbtn:hover{border-color:rgba(224,24,92,.38);color:var(--C);background:rgba(224,24,92,.08)}
-.cl-fbtn.on{background:var(--F);border-color:var(--F);color:#fff;box-shadow:0 4px 20px rgba(224,24,92,.42)}
-/* grid */
-/* 6 columns → max 2 rows for 11 logos */
-.cl-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;position:relative;z-index:1}
-/* card: logo only, generous padding */
-.cl-card{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:32px 24px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:default;transition:transform .38s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .38s,background .3s,opacity .3s;opacity:0;transform:translateY(14px)}
+.clienti{background:var(--K2);padding:72px 0 88px;position:relative;overflow:hidden}
+/* grid: 6 cols → 2 rows for 11 logos */
+.cl-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:40px 48px;position:relative;z-index:1}
+/* card: fully transparent, no box, no border */
+.cl-card{background:transparent;border:none;border-radius:0;padding:0;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(14px);transition:opacity .38s cubic-bezier(.22,1,.36,1),transform .38s cubic-bezier(.22,1,.36,1)}
 .cl-card.cl-vis{opacity:1;transform:translateY(0)}
-.cl-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(224,24,92,.07),transparent 55%);opacity:0;transition:opacity .35s;pointer-events:none}
-.cl-card:hover{transform:translateY(-4px);border-color:rgba(224,24,92,.32);box-shadow:0 18px 44px rgba(0,0,0,.28),inset 0 0 0 1px rgba(224,24,92,.09);background:rgba(255,255,255,.065)}
-.cl-card:hover::before{opacity:1}
 .cl-card.cl-out{opacity:0;transform:scale(.9) translateY(6px);pointer-events:none}
-/* logo — big and breathing */
-.cl-logo-wrap{width:100%;height:72px;display:flex;align-items:center;justify-content:center}
-.cl-logo-wrap img{max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1) opacity(.62);transition:filter .3s}
+/* logo — larger (+53%) and breathing */
+.cl-logo-wrap{width:100%;height:110px;display:flex;align-items:center;justify-content:center}
+.cl-logo-wrap img{max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1) opacity(.6);transition:filter .3s}
 .cl-card:hover .cl-logo-wrap img{filter:brightness(0) invert(1) opacity(1)}
 /* responsive */
-@media(max-width:1100px){.cl-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:768px){.cl-grid{grid-template-columns:repeat(3,1fr);gap:10px}.cl-filters{gap:6px;justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;-ms-overflow-style:none;scrollbar-width:none}.cl-filters::-webkit-scrollbar{display:none}.cl-fbtn{font-size:11.5px;padding:7px 15px;flex-shrink:0}.cl-logo-wrap{height:60px}.cl-card{padding:26px 16px}}
-@media(max-width:480px){.cl-grid{grid-template-columns:repeat(2,1fr);gap:10px}.cl-card{padding:22px 14px}.cl-logo-wrap{height:52px}}
+@media(max-width:1100px){.cl-grid{grid-template-columns:repeat(4,1fr);gap:32px 40px}}
+@media(max-width:768px){.cl-grid{grid-template-columns:repeat(3,1fr);gap:28px 32px}.cl-logo-wrap{height:88px}}
+@media(max-width:480px){.cl-grid{grid-template-columns:repeat(2,1fr);gap:24px 28px}.cl-logo-wrap{height:72px}}
 
 
 </style>
@@ -2455,20 +2440,6 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
 <!-- ═══ CLIENTI SHOWCASE ═══ -->
 <section class="clienti">
   <div class="ctr">
-
-    <div class="cl-hdr rv">
-      <span class="cl-eyebrow">I nostri clienti</span>
-      <h2 class="cl-title">Brand che hanno scelto<br><em>di crescere con noi</em></h2>
-    </div>
-
-    <div class="cl-filters" role="group" aria-label="Filtra per settore">
-      <button class="cl-fbtn on" data-cat="all">Tutti</button>
-      <button class="cl-fbtn" data-cat="fashion">Fashion</button>
-      <button class="cl-fbtn" data-cat="retail">Retail</button>
-      <button class="cl-fbtn" data-cat="food">Food & Beverage</button>
-      <button class="cl-fbtn" data-cat="manufacturing">Manufacturing</button>
-      <button class="cl-fbtn" data-cat="technology">Technology</button>
-    </div>
 
     <div class="cl-grid" id="clGrid">
       <div class="cl-card" data-cat="fashion">
