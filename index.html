@@ -71,6 +71,11 @@ body{font-family:var(--fb);background:var(--K);color:var(--C);overflow-x:hidden;
    Destra: immagine dominante full-height
    ═══════════════════════════════════════════════════════ */
 .hero{position:relative;min-height:calc(100vh - 80px);display:grid;grid-template-columns:1.45fr 1fr;background:var(--K);overflow:hidden}
+/* full-bleed background image behind everything */
+.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+/* dark overlay so text and form stay readable */
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(28,28,28,.82) 50%,rgba(28,28,28,.68))}
 /* dot grid texture */
 .hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
   background-image:radial-gradient(circle,rgba(243,239,224,.03) 1px,transparent 1px);
@@ -84,7 +89,7 @@ body{font-family:var(--fb);background:var(--K);color:var(--C);overflow-x:hidden;
 .hero-copy{display:flex;flex-direction:column;justify-content:flex-start;padding:120px var(--px) 80px;position:relative;z-index:1}
 
 /* image placeholder below the copy text */
-.hero-copy-img{flex:1;position:relative;overflow:hidden;border-radius:16px;min-height:200px;margin-top:auto;padding-top:28px}
+.hero-copy-img{display:none}
 .hero-copy-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;border-radius:16px}
 .hero-copy-placeholder{background:rgba(255,255,255,.04);border:1.5px dashed rgba(243,239,224,.15);display:flex;align-items:center;justify-content:center}
 .hero-placeholder-inner{display:flex;flex-direction:column;align-items:center;gap:10px;color:rgba(243,239,224,.25);user-select:none}
@@ -2243,6 +2248,11 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
+  <!-- background image -->
+  <div class="hero-bg" aria-hidden="true">
+    <img src="Hero section1.webp" alt="">
+  </div>
+
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-glow2" aria-hidden="true"></div>
 
