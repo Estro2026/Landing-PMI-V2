@@ -1261,14 +1261,13 @@ h2.srv em{font-style:normal;color:var(--F)}
 .lw-section-head{text-align:center;margin-bottom:52px;position:relative;z-index:1}
 .trust h2{font-family:var(--fd);font-size:clamp(28px,3vw,42px);line-height:1.04;letter-spacing:-1.5px;color:var(--C);text-align:center;margin:10px 0 0}
 
-.lw-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:52px;
-  border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)}
+/* stats — no borders or dividers, numbers sized to fill the section */
+.lw-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
 .lw-stat{display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:10px;padding:36px 24px;position:relative;text-align:center}
-.lw-stat+.lw-stat::before{content:'';position:absolute;left:0;top:20%;height:60%;width:1px;background:rgba(255,255,255,.07)}
-.lw-stat-val{font-family:var(--fd);font-size:clamp(44px,5vw,72px);line-height:.92;
-  letter-spacing:-2.5px;color:var(--F);display:block}
-.lw-stat-lbl{font-size:14px;font-weight:600;color:rgba(243,239,224,.55);letter-spacing:.1px;display:block}
+  gap:16px;padding:24px;text-align:center}
+.lw-stat-val{font-family:var(--fd);font-size:clamp(64px,8.5vw,128px);line-height:.92;
+  letter-spacing:-4px;color:var(--F);display:block}
+.lw-stat-lbl{font-size:17px;font-weight:600;color:rgba(243,239,224,.6);letter-spacing:.2px;display:block}
 
 /* ── LOGO WALL — editorial split layout ── */
 .lw-editorial{
@@ -1708,9 +1707,8 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
   .target,.benefici{overflow:hidden}
   .bfx-img{width:clamp(240px,82%,365px)}
   /* trust/casi studio tablet */
-  .lw-stats{grid-template-columns:repeat(2,1fr)}
-  .lw-stat:nth-child(2)::before{display:none}
-  .lw-stat-val{font-size:clamp(36px,6vw,52px)}
+  .lw-stats{grid-template-columns:repeat(2,1fr);gap:28px 0}
+  .lw-stat-val{font-size:clamp(56px,10vw,88px)}
   .cs-panel.is-active{grid-template-columns:1fr}
   .cs-panel-img{aspect-ratio:16/9;height:auto}
 }
