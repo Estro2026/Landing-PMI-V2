@@ -290,11 +290,12 @@ body{font-family:var(--fb);background:var(--K);color:var(--C);overflow-x:hidden;
 
 /* ─── STRIP (stile VI/Estro Siti Web_1_06) ─── */
 .strip{background:var(--F);border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);padding:18px 0;overflow:hidden}
-.strip-track{display:flex;animation:stripsz 28s linear infinite;width:max-content}
-.strip-item{display:flex;align-items:center;gap:42px;padding:0 42px}
+/* static — no animation: the logo marquee below is the only moving element */
+.strip-track{display:flex;justify-content:center}
+.strip-item{display:flex;align-items:center;justify-content:center;gap:20px 42px;padding:0 42px;flex-wrap:wrap}
+.strip-item .strip-sep:last-child{display:none}
 .strip-tx{font-family:var(--fd);font-size:18px;color:#fff;letter-spacing:1px;text-transform:uppercase;line-height:1;white-space:nowrap}
 .strip-sep{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5);flex-shrink:0}
-@keyframes stripsz{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ═══ TARGET ═══ */
 /* ── Shared light-surface depth system ───────────────────────────────── */
@@ -2401,16 +2402,6 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
 <div class="strip">
   <div class="strip-track">
     <div class="strip-item">
-      <span class="strip-tx">Strategia Digitale</span><span class="strip-sep"></span>
-      <span class="strip-tx">Social Media</span><span class="strip-sep"></span>
-      <span class="strip-tx">Campagne ADV</span><span class="strip-sep"></span>
-      <span class="strip-tx">Content Marketing</span><span class="strip-sep"></span>
-      <span class="strip-tx">SEO</span><span class="strip-sep"></span>
-      <span class="strip-tx">Brand Identity</span><span class="strip-sep"></span>
-      <span class="strip-tx">Email Marketing</span><span class="strip-sep"></span>
-      <span class="strip-tx">Analytics</span><span class="strip-sep"></span>
-    </div>
-    <div class="strip-item" aria-hidden="true">
       <span class="strip-tx">Strategia Digitale</span><span class="strip-sep"></span>
       <span class="strip-tx">Social Media</span><span class="strip-sep"></span>
       <span class="strip-tx">Campagne ADV</span><span class="strip-sep"></span>
