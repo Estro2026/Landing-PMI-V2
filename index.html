@@ -2180,21 +2180,7 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
 }
 
 /* ═══ CLIENTI SHOWCASE ═══ */
-.clienti{background:var(--K2);padding:72px 0 88px;position:relative;overflow:hidden}
-/* grid: 6 cols → 2 rows for 11 logos */
-.cl-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:40px 48px;position:relative;z-index:1}
-/* card: fully transparent, no box, no border */
-.cl-card{background:transparent;border:none;border-radius:0;padding:0;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(14px);transition:opacity .38s cubic-bezier(.22,1,.36,1),transform .38s cubic-bezier(.22,1,.36,1)}
-.cl-card.cl-vis{opacity:1;transform:translateY(0)}
-.cl-card.cl-out{opacity:0;transform:scale(.9) translateY(6px);pointer-events:none}
-/* logo — larger (+53%) and breathing */
-.cl-logo-wrap{width:100%;height:110px;display:flex;align-items:center;justify-content:center}
-.cl-logo-wrap img{max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1) opacity(.6);transition:filter .3s}
-.cl-card:hover .cl-logo-wrap img{filter:brightness(0) invert(1) opacity(1)}
-/* responsive */
-@media(max-width:1100px){.cl-grid{grid-template-columns:repeat(4,1fr);gap:32px 40px}}
-@media(max-width:768px){.cl-grid{grid-template-columns:repeat(3,1fr);gap:28px 32px}.cl-logo-wrap{height:88px}}
-@media(max-width:480px){.cl-grid{grid-template-columns:repeat(2,1fr);gap:24px 28px}.cl-logo-wrap{height:72px}}
+.clienti{background:var(--K2);padding:60px 0;position:relative;overflow:hidden}
 
 
 </style>
@@ -2439,44 +2425,117 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
 
 <!-- ═══ CLIENTI SHOWCASE ═══ -->
 <section class="clienti">
-  <div class="ctr">
-
-    <div class="cl-grid" id="clGrid">
-      <div class="cl-card" data-cat="fashion">
-        <div class="cl-logo-wrap"><img src="Loghi/hdllogo.webp" alt="HDL Milano" loading="lazy"></div>
-      </div>
-      <div class="cl-card" data-cat="fashion">
-        <div class="cl-logo-wrap"><img src="Loghi/FRAGI.webp" alt="Fragi" loading="lazy"></div>
-      </div>
-      <div class="cl-card" data-cat="fashion">
-        <div class="cl-logo-wrap"><img src="Loghi/KATE.webp" alt="Kate" loading="lazy"></div>
-      </div>
-      <div class="cl-card" data-cat="retail">
-        <div class="cl-logo-wrap"><img src="Loghi/LOVESUN.webp" alt="Lovesun" loading="lazy"></div>
-      </div>
-      <div class="cl-card" data-cat="retail">
-        <div class="cl-logo-wrap"><img src="Loghi/NOIKASA.webp" alt="Noikasa" loading="lazy"></div>
-      </div>
-      <div class="cl-card" data-cat="food">
-        <div class="cl-logo-wrap"><img src="Loghi/FAMILY.webp" alt="The Family" loading="lazy"></div>
-      </div>
-      <div class="cl-card" data-cat="manufacturing">
-        <div class="cl-logo-wrap"><img src="Loghi/ABC.webp" alt="ABCtools" loading="lazy"></div>
-      </div>
-      <div class="cl-card" data-cat="manufacturing">
-        <div class="cl-logo-wrap"><img src="Loghi/MESTEL.webp" alt="Mestel" loading="lazy"></div>
-      </div>
-      <div class="cl-card" data-cat="manufacturing">
-        <div class="cl-logo-wrap"><img src="Loghi/FINESTRATEK.webp" alt="Finestratek" loading="lazy"></div>
-      </div>
-      <div class="cl-card" data-cat="technology">
-        <div class="cl-logo-wrap"><img src="Loghi/ELCO.webp" alt="Elco" loading="lazy"></div>
-      </div>
-      <div class="cl-card" data-cat="technology">
-        <div class="cl-logo-wrap"><img src="Loghi/PROXIMA.webp" alt="Proxima" loading="lazy"></div>
+  <div class="lw-streams" style="mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)">
+    <!-- Riga 1 — avanti -->
+    <div class="lw-row">
+      <div class="lw-track lw-track--fwd">
+        <div class="lw-logo"><img src="Loghi/FAMILY.webp" alt="The Family" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/FINESTRATEK.webp" alt="Finestratek" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/FRAGI.webp" alt="Fragi" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/KATE.webp" alt="Kate" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/LOVESUN.webp" alt="Lovesun" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/MESTEL.webp" alt="Mestel" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/NOIKASA.webp" alt="Noikasa" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/PROXIMA.webp" alt="Proxima" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/Prada.webp" alt="Prada" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/abctools.webp" alt="ABC Tools" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/accenture.webp" alt="Accenture" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/aprilia.webp" alt="Aprilia" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/ariston.webp" alt="Ariston" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/awlab.webp" alt="Awlab" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/biorepair.webp" alt="Biorepair" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/bocconi.webp" alt="Bocconi" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/cartier.webp" alt="Cartier" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/conde nast.webp" alt="Condé Nast" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/coswell.webp" alt="Coswell" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/cupra.webp" alt="Cupra" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/disclaimer.webp" alt="Disclaimer" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/elco.webp" alt="Elco" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/elmec.webp" alt="Elmec" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/fanuc.webp" alt="Fanuc" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/gucci.webp" alt="Gucci" loading="lazy"></div>
+        <!-- duplica per loop seamless -->
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/FAMILY.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/FINESTRATEK.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/FRAGI.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/KATE.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/LOVESUN.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/MESTEL.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/NOIKASA.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/PROXIMA.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/Prada.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/abctools.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/accenture.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/aprilia.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/ariston.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/awlab.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/biorepair.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/bocconi.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/cartier.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/conde nast.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/coswell.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/cupra.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/disclaimer.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/elco.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/elmec.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/fanuc.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/gucci.webp" alt="" loading="lazy"></div>
       </div>
     </div>
-
+    <!-- Riga 2 — indietro -->
+    <div class="lw-row">
+      <div class="lw-track lw-track--rev">
+        <div class="lw-logo"><img src="Loghi/hdllogo.webp" alt="HDL Milano" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/humanitas.webp" alt="Humanitas" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/kawasaki.webp" alt="Kawasaki" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/l'angelica.webp" alt="L'Angelica" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/lamborghini.webp" alt="Lamborghini" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/leolandia.webp" alt="Leolandia" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/motoguzzi.webp" alt="Moto Guzzi" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/pandora.webp" alt="Pandora" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/patagonia.webp" alt="Patagonia" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/plenitude.webp" alt="Plenitude" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/pyrex.webp" alt="Pyrex" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/rai.webp" alt="RAI" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/redbull.png" alt="Red Bull" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/remax.webp" alt="RE/MAX" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/seat.webp" alt="SEAT" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/sector.webp" alt="Sector" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/seven.webp" alt="Seven" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/sj gang.webp" alt="SJ Gang" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/spotify.webp" alt="Spotify" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/star.webp" alt="Star" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/ted.webp" alt="TED" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/terranova.webp" alt="Terranova" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/wolf.webp" alt="Wolf" loading="lazy"></div>
+        <div class="lw-logo"><img src="Loghi/wudy.webp" alt="Wudy" loading="lazy"></div>
+        <!-- duplica per loop seamless -->
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/hdllogo.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/humanitas.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/kawasaki.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/l'angelica.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/lamborghini.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/leolandia.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/motoguzzi.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/pandora.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/patagonia.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/plenitude.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/pyrex.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/rai.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/redbull.png" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/remax.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/seat.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/sector.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/seven.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/sj gang.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/spotify.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/star.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/ted.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/terranova.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/wolf.webp" alt="" loading="lazy"></div>
+        <div class="lw-logo" aria-hidden="true"><img src="Loghi/wudy.webp" alt="" loading="lazy"></div>
+      </div>
+    </div>
   </div>
 </section>
 
