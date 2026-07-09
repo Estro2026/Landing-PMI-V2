@@ -295,10 +295,9 @@ body{font-family:var(--fb);background:var(--K);color:var(--C);overflow-x:hidden;
 
 /* ─── STRIP (stile VI/Estro Siti Web_1_06) ─── */
 .strip{background:var(--F);border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);padding:18px 0;overflow:hidden}
-/* static — no animation: the logo marquee below is the only moving element */
-.strip-track{display:flex;justify-content:center}
-/* edges aligned with hero columns (padding var(--px)), items distributed between them */
-.strip-item{display:flex;align-items:center;justify-content:space-between;gap:clamp(6px,1.2vw,24px);padding:0 var(--px);flex-wrap:nowrap;width:100%}
+.strip-track{display:flex;animation:marquee 22s linear infinite}
+.strip:hover .strip-track{animation-play-state:paused}
+.strip-item{display:flex;align-items:center;gap:clamp(16px,2.5vw,44px);padding:0 clamp(16px,2.5vw,44px);flex-wrap:nowrap;flex-shrink:0}
 .strip-item .strip-sep:last-child{display:none}
 /* sized so all 8 items always fit the band width without clipping */
 .strip-tx{font-family:var(--fd);font-size:clamp(9px,1.15vw,17px);color:#fff;letter-spacing:.4px;text-transform:uppercase;line-height:1;white-space:nowrap}
@@ -778,7 +777,7 @@ h2.srv em{font-style:normal;color:var(--F)}
 .srv-nucleus-core{
   width:130px;height:130px;border-radius:50%;
   overflow:hidden;
-  background:url('gattino-estro-favicon.png') no-repeat center center;
+  background:url('gattinoestrofavicon.png') no-repeat center center;
   background-size:80%;
   box-shadow:0 0 0 4px rgba(224,24,92,.25),0 0 28px rgba(224,24,92,.55),0 0 60px rgba(224,24,92,.18);
   animation:nucleus-spin 10s linear infinite;
@@ -1243,6 +1242,7 @@ h2.srv em{font-style:normal;color:var(--F)}
 .trust-tag{font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(243,239,224,.35);display:block;margin-bottom:14px;text-align:center}
 .trust-tag::before{content:none}
 .trust h2{font-family:var(--fd);font-size:clamp(30px,3.2vw,44px);line-height:1.06;letter-spacing:-1.5px;color:var(--C);text-align:center;margin-bottom:52px}
+.trust h2 em{font-style:normal;color:#e0185c}
 
 /* ─── Editorial logo wall ─── */
 /* ─── Marquee logo wall ─── */
@@ -2184,8 +2184,211 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
   .lw-track{animation-duration:50s}
 }
 
-/* ═══ CLIENTI SHOWCASE ═══ */
-.clienti{background:var(--K2);padding:60px 0;position:relative;overflow:hidden}
+/* ── Single-row logo wall (aziende section) ── */
+.lw-single{padding:28px 0}
+.lw-single .lw-logo{height:110px;padding:0 52px}
+.lw-single .lw-logo img{height:88px;max-width:220px}
+
+/* ── CS tab logos ── */
+.cs-tab-logo{height:26px;display:flex;align-items:center;flex-shrink:0;margin-right:2px}
+.cs-tab-logo img{height:100%;width:auto;max-width:80px;object-fit:contain;
+  filter:brightness(0) invert(1);opacity:.38;transition:opacity .3s,filter .3s}
+.cs-tab.is-active .cs-tab-logo img,.cs-tab:hover .cs-tab-logo img{opacity:.85}
+
+/* ── Stats smaller variant (after case studies) ── */
+.lw-stats--sm{margin-top:64px;border-top:1px solid rgba(255,255,255,.06);padding-top:56px}
+.lw-stats--sm .lw-stat-val{font-size:clamp(32px,4.5vw,64px)}
+.lw-stats--sm .lw-stat-lbl{font-size:14px}
+
+/* ══ CASE STUDY — redesign identico a Landing-PMI ══ */
+/* cs-label = stesso stile degli altri tag sezione (srv-tag, trust-tag, ecc.) */
+.cs-label{font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--F);display:block;margin-bottom:6px}
+.cs-label::before{content:none!important;display:none!important}
+
+/* Tabs: solo testo, sfondo vino scuro quando attivo + linea fuchsia */
+.cs-tab-logo{display:none!important}
+.cs-tabs{gap:8px;border-radius:16px}
+.cs-tab{justify-content:center;text-align:center;padding:14px 18px;font-size:13px;font-weight:400;font-family:var(--fd);letter-spacing:.5px;color:rgba(243,239,224,.42)}
+.cs-tab:hover{background:rgba(255,255,255,.06);color:rgba(243,239,224,.7)}
+.cs-tab.is-active{
+  background:rgba(45,3,15,.88)!important;
+  border-bottom:3px solid var(--F)!important;
+  border-top:1px solid rgba(255,255,255,.06)!important;
+  border-left:1px solid rgba(255,255,255,.06)!important;
+  border-right:1px solid rgba(255,255,255,.06)!important;
+  color:#fff!important;
+  box-shadow:none!important;
+  font-weight:600!important;
+}
+.cs-tab-info,.cs-tab-num{display:none}
+.cs-tab-text{font-size:14px;font-weight:500}
+
+/* Panel: layout a 2 colonne, destra = flex-col card+kpi */
+.cs-panel.is-active{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:14px!important;
+  border:none!important;
+  background:transparent!important;
+  border-radius:0!important;
+  overflow:visible!important;
+  min-height:auto!important;
+  animation:csFadeIn .38s cubic-bezier(.22,1,.36,1)
+}
+/* reset accent border overrides */
+.cs-panel[data-accent].is-active{border-color:transparent!important}
+
+/* image col */
+.cs-panel-img{border-radius:16px!important;overflow:hidden!important}
+/* reset accent gradients — real photo shows instead */
+.cs-panel[data-accent="pine"] .cs-panel-img,
+.cs-panel[data-accent="tera"] .cs-panel-img,
+.cs-panel[data-accent="mua"] .cs-panel-img,
+.cs-panel[data-accent="quiete"] .cs-panel-img{background:#111!important}
+.cs-panel-img img{border-radius:0;width:100%;height:100%;object-fit:cover;display:block}
+
+/* right column wrapper */
+.cs-panel-right{display:flex;flex-direction:column;gap:12px}
+
+/* body card */
+.cs-panel-body{
+  background:rgba(255,255,255,.04)!important;
+  border:1px solid rgba(255,255,255,.09)!important;
+  border-radius:16px!important;
+  padding:28px 26px 24px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:10px!important;
+  flex:1!important;
+  transform:none!important
+}
+.cs-panel:hover .cs-panel-body{transform:none!important}
+
+/* logo nel body */
+.cs-panel-logo{display:flex;align-items:center;margin-bottom:4px}
+.cs-panel-logo img{
+  height:96px;width:auto;max-width:260px;object-fit:contain;
+  filter:brightness(0) invert(1);opacity:.88;display:block
+}
+
+/* badge — solo testo fuchsia — min 13px */
+.cs-badge-plain{
+  font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--F);display:block
+}
+/* nascondi vecchio badge */
+.cs-panel .cs-badge,.cs-panel .cs-kpi-strip,.cs-panel .cs-results{display:none!important}
+
+/* titolo e desc */
+.cs-panel-title{font-family:var(--fb)!important;font-size:17px!important;font-weight:700!important;letter-spacing:-.2px!important;color:var(--C)!important;line-height:1.3!important;margin:0!important}
+.cs-panel-desc{font-size:13.5px!important;color:rgba(243,239,224,.54)!important;line-height:1.68!important;margin:0!important}
+
+/* tag chips — min 13px */
+.cs-panel .cs-foot{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;padding-top:0}
+.cs-panel .cs-tags span{font-size:13px;font-weight:500;letter-spacing:.3px;text-transform:none;color:rgba(243,239,224,.5);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--rp);padding:5px 12px}
+
+/* KPI row — 3 card separate */
+.cs-kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cs-kpi-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:14px;
+  padding:18px 12px;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:6px
+}
+.cs-kv{
+  font-family:var(--fd);
+  font-size:clamp(18px,2vw,26px);
+  color:var(--F);font-weight:400;line-height:1;letter-spacing:-.5px;display:block
+}
+.cs-kl{font-size:13px;color:rgba(243,239,224,.42);line-height:1.4;display:block}
+
+/* ── Trust section — breakpoints completi ── */
+
+/* ≤1100px — tablet landscape */
+@media(max-width:1100px){
+  .lw-single .lw-logo{height:88px;padding:0 36px}
+  .lw-single .lw-logo img{height:68px;max-width:180px}
+  .lw-wrap[style*="margin-bottom:80px"]{margin-bottom:56px!important}
+  .cs-panel-body{padding:22px 20px 20px!important}
+  .cs-panel-logo img{height:80px}
+  .cs-kv{font-size:clamp(16px,1.8vw,24px)}
+}
+
+/* ≤900px — tablet portrait: panel su colonna singola */
+@media(max-width:900px){
+  .cs-panel.is-active{grid-template-columns:1fr!important;gap:0!important;border-radius:16px;overflow:hidden}
+  .cs-panel-img{aspect-ratio:16/9;height:auto!important;border-radius:0!important}
+  .cs-panel-img img{border-radius:0}
+  .cs-panel-right{padding:0}
+  .cs-kpi-row{grid-template-columns:repeat(3,1fr);gap:8px}
+  .cs-kpi-card{padding:16px 10px}
+  .cs-kv{font-size:clamp(17px,2.4vw,26px)}
+  .cs-panel-logo img{height:64px}
+  .cs-tabs-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .cs-tabs{flex-wrap:nowrap;min-width:max-content}
+}
+
+/* ≤768px — tablet piccolo: tab a griglia 2×2 */
+@media(max-width:768px){
+  .cs-tabs{flex-wrap:wrap!important;min-width:0!important}
+  .cs-tab{flex:none!important;width:calc(50% - 4px)!important}
+  .cs-panel-title{font-size:16px!important}
+  .cs-panel-desc{font-size:13px!important}
+  .cs-kv{font-size:20px}
+  .cs-kl{font-size:13px}
+  .lw-single .lw-logo{height:72px;padding:0 24px}
+  .lw-single .lw-logo img{height:52px;max-width:140px}
+  .lw-stats--sm{margin-top:48px;padding-top:40px}
+  .lw-stats--sm .lw-stat-val{font-size:clamp(28px,6vw,52px)}
+}
+
+/* ≤640px — mobile */
+@media(max-width:640px){
+  /* titolo sezione: meno spazio sotto */
+  .trust .lw-section-head{margin-bottom:20px}
+  /* banda loghi: più grande, animazione più veloce, loghi più vicini */
+  .lw-single{padding:26px 0}
+  .lw-single .lw-logo{height:110px;padding:0 16px}
+  .lw-single .lw-logo img{height:86px;max-width:200px}
+  .lw-track--fwd{animation-duration:12s!important}
+  .lw-wrap[style*="margin-bottom"]{margin-bottom:16px!important}
+  /* case study */
+  .cs-block{margin-top:28px}
+  .cs-block-head{gap:6px}
+  .cs-title{font-size:clamp(22px,6vw,32px)}
+  .cs-tabs{gap:6px!important}
+  .cs-tab{padding:12px 10px!important;font-size:13px!important}
+  .cs-panel-img{aspect-ratio:4/3}
+  .cs-panel-body{padding:18px 16px 16px!important;gap:8px!important}
+  .cs-panel-logo img{height:80px!important}
+  .cs-badge-plain{font-size:13px;letter-spacing:1.5px}
+  .cs-panel-title{font-size:15px!important;letter-spacing:-.1px!important}
+  .cs-panel-desc{font-size:13px!important}
+  .cs-tags span{font-size:13px;padding:4px 10px}
+  .cs-kpi-row{gap:6px}
+  .cs-kpi-card{padding:12px 8px;border-radius:10px}
+  .cs-kv{font-size:18px}
+  .cs-kl{font-size:13px}
+  .lw-stats--sm{margin-top:36px;padding-top:32px;gap:0}
+  .lw-stats--sm .lw-stat-val{font-size:clamp(26px,7.5vw,44px)}
+  .lw-stats--sm .lw-stat-lbl{font-size:13px}
+  .lw-stats--sm .lw-stat{padding:20px 0}
+}
+
+/* ≤480px — small mobile */
+@media(max-width:480px){
+  .lw-single .lw-logo{height:96px;padding:0 22px}
+  .lw-single .lw-logo img{height:74px;max-width:180px}
+  .cs-panel-img{aspect-ratio:3/2}
+  .cs-tab{font-size:13px!important;padding:10px 8px!important}
+  .cs-kpi-row{grid-template-columns:repeat(3,1fr)}
+  .cs-kpi-card{padding:10px 6px;border-radius:8px}
+  .cs-kv{font-size:15px}
+  .cs-kl{font-size:13px}
+  .cs-panel-logo img{height:72px!important;max-width:200px}
+  .lw-stats--sm{grid-template-columns:repeat(2,1fr)!important}
+}
 
 
 </style>
@@ -2196,7 +2399,7 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
 <div class="spb" role="progressbar" aria-label="Progresso lettura pagina"><div class="spb-track"><div class="spb-fill" id="spbFill"></div></div></div>
 <header class="hdr" id="hdr">
   <a href="#" class="logo">
-    <img src="Logo-estro.webp" alt="Estro Agency Logo" class="logo-img">
+    <img src="Logoestro.webp" alt="Estro Agency Logo" class="logo-img">
   </a>
   <nav class="hnav">
     <a href="#target">Soluzione</a>
@@ -2409,8 +2612,18 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
 
 <!-- ─── STRIP ─── -->
 <div class="strip">
-  <div class="strip-track">
+  <div class="strip-track" aria-hidden="true">
     <div class="strip-item">
+      <span class="strip-tx">Strategia Digitale</span><span class="strip-sep"></span>
+      <span class="strip-tx">Social Media</span><span class="strip-sep"></span>
+      <span class="strip-tx">Campagne ADV</span><span class="strip-sep"></span>
+      <span class="strip-tx">Content Marketing</span><span class="strip-sep"></span>
+      <span class="strip-tx">SEO</span><span class="strip-sep"></span>
+      <span class="strip-tx">Brand Identity</span><span class="strip-sep"></span>
+      <span class="strip-tx">Email Marketing</span><span class="strip-sep"></span>
+      <span class="strip-tx">Analytics</span><span class="strip-sep"></span>
+    </div>
+    <div class="strip-item" aria-hidden="true">
       <span class="strip-tx">Strategia Digitale</span><span class="strip-sep"></span>
       <span class="strip-tx">Social Media</span><span class="strip-sep"></span>
       <span class="strip-tx">Campagne ADV</span><span class="strip-sep"></span>
@@ -2422,122 +2635,6 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
     </div>
   </div>
 </div>
-
-<!-- ═══ CLIENTI SHOWCASE ═══ -->
-<section class="clienti">
-  <div class="lw-streams" style="mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)">
-    <!-- Riga 1 — avanti -->
-    <div class="lw-row">
-      <div class="lw-track lw-track--fwd">
-        <div class="lw-logo"><img src="Loghi/FAMILY.webp" alt="The Family" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/FINESTRATEK.webp" alt="Finestratek" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/FRAGI.webp" alt="Fragi" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/KATE.webp" alt="Kate" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/LOVESUN.webp" alt="Lovesun" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/MESTEL.webp" alt="Mestel" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/NOIKASA.webp" alt="Noikasa" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/PROXIMA.webp" alt="Proxima" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/Prada.webp" alt="Prada" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/abctools.webp" alt="ABC Tools" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/accenture.webp" alt="Accenture" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/aprilia.webp" alt="Aprilia" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/ariston.webp" alt="Ariston" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/awlab.webp" alt="Awlab" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/biorepair.webp" alt="Biorepair" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/bocconi.webp" alt="Bocconi" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/cartier.webp" alt="Cartier" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/conde nast.webp" alt="Condé Nast" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/coswell.webp" alt="Coswell" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/cupra.webp" alt="Cupra" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/disclaimer.webp" alt="Disclaimer" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/elco.webp" alt="Elco" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/elmec.webp" alt="Elmec" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/fanuc.webp" alt="Fanuc" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/gucci.webp" alt="Gucci" loading="lazy"></div>
-        <!-- duplica per loop seamless -->
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/FAMILY.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/FINESTRATEK.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/FRAGI.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/KATE.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/LOVESUN.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/MESTEL.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/NOIKASA.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/PROXIMA.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/Prada.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/abctools.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/accenture.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/aprilia.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/ariston.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/awlab.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/biorepair.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/bocconi.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/cartier.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/conde nast.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/coswell.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/cupra.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/disclaimer.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/elco.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/elmec.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/fanuc.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/gucci.webp" alt="" loading="lazy"></div>
-      </div>
-    </div>
-    <!-- Riga 2 — indietro -->
-    <div class="lw-row">
-      <div class="lw-track lw-track--rev">
-        <div class="lw-logo"><img src="Loghi/hdllogo.webp" alt="HDL Milano" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/humanitas.webp" alt="Humanitas" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/kawasaki.webp" alt="Kawasaki" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/l'angelica.webp" alt="L'Angelica" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/lamborghini.webp" alt="Lamborghini" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/leolandia.webp" alt="Leolandia" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/motoguzzi.webp" alt="Moto Guzzi" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/pandora.webp" alt="Pandora" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/patagonia.webp" alt="Patagonia" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/plenitude.webp" alt="Plenitude" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/pyrex.webp" alt="Pyrex" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/rai.webp" alt="RAI" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/redbull.png" alt="Red Bull" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/remax.webp" alt="RE/MAX" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/seat.webp" alt="SEAT" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/sector.webp" alt="Sector" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/seven.webp" alt="Seven" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/sj gang.webp" alt="SJ Gang" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/spotify.webp" alt="Spotify" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/star.webp" alt="Star" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/ted.webp" alt="TED" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/terranova.webp" alt="Terranova" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/wolf.webp" alt="Wolf" loading="lazy"></div>
-        <div class="lw-logo"><img src="Loghi/wudy.webp" alt="Wudy" loading="lazy"></div>
-        <!-- duplica per loop seamless -->
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/hdllogo.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/humanitas.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/kawasaki.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/l'angelica.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/lamborghini.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/leolandia.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/motoguzzi.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/pandora.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/patagonia.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/plenitude.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/pyrex.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/rai.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/redbull.png" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/remax.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/seat.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/sector.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/seven.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/sj gang.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/spotify.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/star.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/ted.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/terranova.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/wolf.webp" alt="" loading="lazy"></div>
-        <div class="lw-logo" aria-hidden="true"><img src="Loghi/wudy.webp" alt="" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ═══ TARGET + SOLUZIONE ═══ -->
 <section class="target" id="target">
@@ -2906,7 +3003,7 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
         <div class="bfx-stage" id="bfxStage">
           <div class="bfx-glow" aria-hidden="true"></div>
           <canvas class="bfx-cvs" id="bfxCvs" aria-hidden="true"></canvas>
-          <img class="bfx-img" src="benefici grafica1.png" alt="" aria-hidden="true">
+          <img class="bfx-img" src="beneficigrafic1.png" alt="" aria-hidden="true">
           <!-- Emerging keywords (desktop) -->
           <div class="bkw-sys" aria-hidden="true">
             <div class="bkw bkw-0" data-idx="0"><div class="bkw-dot"></div><span class="bkw-label">TEMPO</span></div>
@@ -2927,19 +3024,263 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
   </div>
 </section>
 
-<!-- ═══ TRUST ═══ -->
+<!-- ═══ AZIENDE CHE SI FIDANO ═══ -->
 <section class="trust" id="clienti">
   <div class="trust-dots" aria-hidden="true"></div>
   <div class="ctr">
 
-    <!-- ── Stats ── -->
-    <div class="lw-stats rv" style="justify-content:center">
-      <div class="lw-stat"><span class="lw-stat-val">10+</span><span class="lw-stat-lbl">Anni</span></div>
-      <div class="lw-stat"><span class="lw-stat-val">200+</span><span class="lw-stat-lbl">Progetti</span></div>
-      <div class="lw-stat"><span class="lw-stat-val">80+</span><span class="lw-stat-lbl">Si fidano di noi</span></div>
-      <div class="lw-stat"><span class="lw-stat-val">90%</span><span class="lw-stat-lbl">Rinnovi</span></div>
+    <!-- Header -->
+    <div class="lw-section-head rv">
+      <span class="trust-tag">I nostri clienti</span>
+      <h2>Aziende che si <em>fidano di noi.</em></h2>
     </div>
 
+  </div>
+
+  <!-- Banda loghi — singola riga, loghi grandi -->
+  <div class="lw-wrap lw-single rv" style="margin-bottom:80px">
+    <div class="lw-track lw-track--fwd" style="animation-duration:20s">
+      <div class="lw-logo"><img src="Loghi/FAMILY.webp" alt="The Family" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/FINESTRATEK.webp" alt="Finestratek" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/FRAGI.webp" alt="Fragi" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/KATE.webp" alt="Kate" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/LOVESUN.webp" alt="Lovesun" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/MESTEL.webp" alt="Mestel" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/NOIKASA.webp" alt="Noikasa" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/PROXIMA.webp" alt="Proxima" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/Prada.webp" alt="Prada" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/abctools.webp" alt="ABC Tools" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/accenture.webp" alt="Accenture" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/aprilia.webp" alt="Aprilia" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/ariston.webp" alt="Ariston" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/awlab.webp" alt="Awlab" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/biorepair.webp" alt="Biorepair" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/bocconi.webp" alt="Bocconi" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/cartier.webp" alt="Cartier" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/conde nast.webp" alt="Condé Nast" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/coswell.webp" alt="Coswell" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/cupra.webp" alt="Cupra" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/disclaimer.webp" alt="Disclaimer" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/elco.webp" alt="Elco" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/elmec.webp" alt="Elmec" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/fanuc.webp" alt="Fanuc" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/gucci.webp" alt="Gucci" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/hdllogo.webp" alt="HDL Milano" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/humanitas.webp" alt="Humanitas" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/kawasaki.webp" alt="Kawasaki" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/lamborghini.webp" alt="Lamborghini" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/leolandia.webp" alt="Leolandia" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/motoguzzi.webp" alt="Moto Guzzi" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/pandora.webp" alt="Pandora" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/patagonia.webp" alt="Patagonia" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/plenitude.webp" alt="Plenitude" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/pyrex.webp" alt="Pyrex" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/rai.webp" alt="RAI" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/redbull.png" alt="Red Bull" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/remax.webp" alt="RE/MAX" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/seat.webp" alt="SEAT" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/sector.webp" alt="Sector" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/seven.webp" alt="Seven" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/spotify.webp" alt="Spotify" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/star.webp" alt="Star" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/ted.webp" alt="TED" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/terranova.webp" alt="Terranova" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/wolf.webp" alt="Wolf" loading="lazy"></div>
+      <div class="lw-logo"><img src="Loghi/wudy.webp" alt="Wudy" loading="lazy"></div>
+      <!-- duplica per loop seamless -->
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/FAMILY.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/FINESTRATEK.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/FRAGI.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/KATE.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/LOVESUN.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/MESTEL.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/NOIKASA.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/PROXIMA.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/Prada.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/abctools.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/accenture.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/aprilia.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/ariston.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/awlab.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/biorepair.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/bocconi.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/cartier.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/conde nast.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/coswell.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/cupra.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/disclaimer.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/elco.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/elmec.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/fanuc.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/gucci.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/hdllogo.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/humanitas.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/kawasaki.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/lamborghini.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/leolandia.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/motoguzzi.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/pandora.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/patagonia.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/plenitude.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/pyrex.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/rai.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/redbull.png" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/remax.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/seat.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/sector.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/seven.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/spotify.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/star.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/ted.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/terranova.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/wolf.webp" alt="" loading="lazy"></div>
+      <div class="lw-logo" aria-hidden="true"><img src="Loghi/wudy.webp" alt="" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="ctr">
+    <!-- Case Studies -->
+    <div class="cs-block rv">
+      <div class="cs-block-head">
+        <div class="cs-block-copy">
+          <p class="cs-label">Casi studio</p>
+          <h3 class="cs-title">Risultati reali, clienti reali</h3>
+          <p class="cs-sub">Come lavoriamo con le aziende che scelgono Estro</p>
+        </div>
+      </div>
+
+      <!-- Tab bar -->
+      <div class="cs-tabs-wrap">
+        <div class="cs-tabs" role="tablist">
+          <button class="cs-tab is-active" role="tab" data-cs="hdl" aria-selected="true">
+            <span class="cs-tab-text">HDL Milano</span>
+          </button>
+          <button class="cs-tab" role="tab" data-cs="fragi" aria-selected="false">
+            <span class="cs-tab-text">Fragi</span>
+          </button>
+          <button class="cs-tab" role="tab" data-cs="family" aria-selected="false">
+            <span class="cs-tab-text">The Family</span>
+          </button>
+          <button class="cs-tab" role="tab" data-cs="abc" aria-selected="false">
+            <span class="cs-tab-text">ABCtools</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Panels -->
+      <div class="cs-panels">
+
+        <!-- HDL Milano -->
+        <div class="cs-panel is-active" data-cs="hdl" role="tabpanel">
+          <div class="cs-panel-img">
+            <img src="fotocase/hdl.webp" alt="HDL Milano" loading="lazy">
+          </div>
+          <div class="cs-panel-right">
+            <div class="cs-panel-body">
+              <div class="cs-panel-logo">
+                <img src="Loghi/hdllogo.webp" alt="HDL Milano" loading="lazy">
+              </div>
+              <span class="cs-badge-plain">FASHION · LUXURY · BRAND BUILDING</span>
+              <h4 class="cs-panel-title">Un brand fashion milanese che si racconta con eleganza</h4>
+              <p class="cs-panel-desc">Identità editoriale e strategia di contenuto per un marchio fashion di fascia alta: shooting coordinati, campagne Meta e presenza organica costruita per parlare al cliente giusto con il tono giusto.</p>
+              <div class="cs-foot cs-tags">
+                <span>Fashion</span><span>Brand identity</span><span>Meta Ads</span><span>Editorial</span>
+              </div>
+            </div>
+            <div class="cs-kpi-row">
+              <div class="cs-kpi-card"><span class="cs-kv">+280%</span><span class="cs-kl">Reach organica in 8 mesi</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">×3.1</span><span class="cs-kl">ROAS medio campagne</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">Full</span><span class="cs-kl">Brand + performance coordinati</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fragi -->
+        <div class="cs-panel" data-cs="fragi" role="tabpanel">
+          <div class="cs-panel-img">
+            <img src="fotocase/fragi.webp" alt="Fragi" loading="lazy">
+          </div>
+          <div class="cs-panel-right">
+            <div class="cs-panel-body">
+              <div class="cs-panel-logo">
+                <img src="Loghi/FRAGI.webp" alt="Fragi" loading="lazy">
+              </div>
+              <span class="cs-badge-plain">FASHION · MENSWEAR · E-COMMERCE</span>
+              <h4 class="cs-panel-title">Stile maschile che diventa desiderio digitale</h4>
+              <p class="cs-panel-desc">Strategia creativa e ADV per un brand menswear: shooting editoriali, content piano mensile e campagne Meta ottimizzate per acquisizione e fidelizzazione di una clientela maschile esigente.</p>
+              <div class="cs-foot cs-tags">
+                <span>Menswear</span><span>Content</span><span>Meta Ads</span><span>E-commerce</span>
+              </div>
+            </div>
+            <div class="cs-kpi-row">
+              <div class="cs-kpi-card"><span class="cs-kv">+190%</span><span class="cs-kl">Vendite online anno su anno</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">×2.5</span><span class="cs-kl">ROAS campagne Meta</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">12 mesi</span><span class="cs-kl">Crescita continuativa</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Family -->
+        <div class="cs-panel" data-cs="family" role="tabpanel">
+          <div class="cs-panel-img">
+            <img src="fotocase/thefamily.png" alt="The Family" loading="lazy">
+          </div>
+          <div class="cs-panel-right">
+            <div class="cs-panel-body">
+              <div class="cs-panel-logo">
+                <img src="Loghi/FAMILY.webp" alt="The Family" loading="lazy">
+              </div>
+              <span class="cs-badge-plain">HOSPITALITY · RISTORAZIONE · LOCAL MARKETING</span>
+              <h4 class="cs-panel-title">Un'istituzione locale che torna a fare rumore</h4>
+              <p class="cs-panel-desc">Rilancio digital per un locale storico: nuova voce social, campagne di prossimità, eventi promossi online e una community costruita attorno all'identità unica del posto. Dal 1900, con un sito.</p>
+              <div class="cs-foot cs-tags">
+                <span>Ristorazione</span><span>Social media</span><span>Local ADV</span><span>Community</span>
+              </div>
+            </div>
+            <div class="cs-kpi-row">
+              <div class="cs-kpi-card"><span class="cs-kv">+420%</span><span class="cs-kl">Copertura social in 6 mesi</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">+35%</span><span class="cs-kl">Prenotazioni da canali digitali</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">Est. 1900</span><span class="cs-kl">Storytelling che valorizza la storia</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABCtools -->
+        <div class="cs-panel" data-cs="abc" role="tabpanel">
+          <div class="cs-panel-img">
+            <img src="fotocase/abctools.png" alt="ABCtools" loading="lazy">
+          </div>
+          <div class="cs-panel-right">
+            <div class="cs-panel-body">
+              <div class="cs-panel-logo">
+                <img src="Loghi/abctools.webp" alt="ABCtools" loading="lazy">
+              </div>
+              <span class="cs-badge-plain">B2B · UTENSILI · PERFORMANCE MEDIA</span>
+              <h4 class="cs-panel-title">Il catalogo tecnico che diventa motore di vendita</h4>
+              <p class="cs-panel-desc">Campagne performance e presenza digitale per un distributore B2B di utensili: dalla strategia al media buying, ogni euro investito tracciato e ottimizzato per massimizzare il ritorno sull'investimento.</p>
+              <div class="cs-foot cs-tags">
+                <span>B2B</span><span>Media buying</span><span>Retargeting</span><span>ROI</span>
+              </div>
+            </div>
+            <div class="cs-kpi-row">
+              <div class="cs-kpi-card"><span class="cs-kv">125€</span><span class="cs-kl">Di ritorno per ogni € investito</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">6 mesi</span><span class="cs-kl">Durata della campagna</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">Full-funnel</span><span class="cs-kl">Copertura, traffico, retargeting</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /cs-panels -->
+
+      <!-- Stats — dopo i case study, dimensioni ridotte -->
+      <div class="lw-stats lw-stats--sm rv">
+        <div class="lw-stat"><span class="lw-stat-val">10+</span><span class="lw-stat-lbl">Anni di esperienza</span></div>
+        <div class="lw-stat"><span class="lw-stat-val">200+</span><span class="lw-stat-lbl">Progetti completati</span></div>
+        <div class="lw-stat"><span class="lw-stat-val">80+</span><span class="lw-stat-lbl">Aziende che si fidano di noi</span></div>
+        <div class="lw-stat"><span class="lw-stat-val">90%</span><span class="lw-stat-lbl">Clienti che rinnovano</span></div>
+      </div>
+
+    </div><!-- /cs-block -->
   </div>
 </section>
 
@@ -3025,7 +3366,7 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
     <div class="ft-cols">
       <div class="fcol ft-brandcol">
         <a href="#top" class="logo">
-          <img src="Logo-estro.webp" alt="Estro — powered by Yuba" class="logo-img-sm">
+          <img src="Logoestro.webp" alt="Estro — powered by Yuba" class="logo-img-sm">
         </a>
       </div>
       <div class="fcol">
@@ -3250,6 +3591,18 @@ const obs=new IntersectionObserver(es=>{
 
   btns.forEach(btn=>btn.addEventListener('click',()=>applyFilter(btn.dataset.cat)));
 })();
+
+// ── Case Study Tabs ───────────────────────────────────────────────────────
+document.querySelectorAll('.cs-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    const k=tab.dataset.cs;
+    document.querySelectorAll('.cs-tab').forEach(t=>{
+      t.classList.toggle('is-active',t===tab);
+      t.setAttribute('aria-selected',t===tab);
+    });
+    document.querySelectorAll('.cs-panel').forEach(p=>p.classList.toggle('is-active',p.dataset.cs===k));
+  });
+});
 
 // ── Portfolio Tabs ────────────────────────────────────────────────────────
 document.querySelectorAll('.pf-tab').forEach(t=>{
