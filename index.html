@@ -70,7 +70,9 @@ body{font-family:var(--fb);background:var(--K);color:var(--C);overflow-x:hidden;
    Sinistra: H1 → copy → form (above the fold su desktop)
    Destra: immagine dominante full-height
    ═══════════════════════════════════════════════════════ */
-.hero{position:relative;min-height:calc(100vh - 80px);display:grid;grid-template-columns:1.45fr 1fr;background:var(--K);overflow:hidden}
+/* above-fold wrapper: hero + strip occupano esattamente 100vh */
+.above-fold{height:100vh;height:100svh;display:flex;flex-direction:column;overflow:hidden}
+.hero{position:relative;flex:1;min-height:0;display:grid;grid-template-columns:1.45fr 1fr;background:var(--K);overflow:hidden}
 /* full-bleed background image behind everything */
 .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
@@ -368,9 +370,7 @@ body{font-family:var(--fb);background:var(--K);color:var(--C);overflow-x:hidden;
 .tg-video .yt-creative{aspect-ratio:16/9;height:auto;position:relative;z-index:1}
 /* card side */
 .tg-card-side{position:relative;z-index:1}
-.tg-card-stripe{position:absolute;left:-20px;top:15%;height:70%;width:3px;
-  background:linear-gradient(180deg,transparent,var(--F) 25%,var(--F) 75%,transparent);
-  border-radius:2px;z-index:0}
+.tg-card-stripe{display:none}
 /* flip card dark front for grandioso: problem list */
 .tg-card-label{font-family:var(--fd);font-size:clamp(16px,1.8vw,22px);letter-spacing:-.4px;color:var(--K);margin-bottom:16px;line-height:1.1}
 .tg-pain-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin:0 0 24px}
@@ -1768,7 +1768,8 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
   .ft-ghost{display:none}
 
   /* ── HERO: copy first, then form, image hidden on mobile ── */
-  .hero{display:flex;flex-direction:column;min-height:auto}
+  /* min-height:0 keeps hero constrained within above-fold (100svh); overflow:hidden clips silently */
+  .hero{display:flex;flex-direction:column;min-height:0}
   .hero-copy{
     order:1;
     padding:88px var(--px) 24px;
@@ -1812,9 +1813,13 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
 
   /* ── STRIP — single line preserved on mobile ── */
   .strip{padding:12px 0}
-  .strip-tx{font-size:clamp(7.5px,1.95vw,12px);letter-spacing:0}
-  .strip-item{gap:clamp(5px,1.3vw,20px);padding:0 var(--px)}
+  .strip-tx{font-size:13px;letter-spacing:.3px}
+  .strip-item{gap:clamp(10px,2.5vw,24px);padding:0 var(--px)}
   .strip-sep{width:3px;height:3px}
+
+  /* ── ABOVE-FOLD: su mobile il vincolo 100svh è rimosso — tutto il contenuto deve essere visibile ── */
+  .above-fold{height:auto;min-height:100svh}
+  .hero{flex:none}
 
   /* ── GLOBAL SECTION SPACING ── */
   .target,.sol,.icone,.cta-mid,.servizi,.proc,.trust,.sproof,.fform{padding:48px 0}
@@ -2131,7 +2136,7 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
   /* ── Global: no internal scroll, no horizontal overflow ── */
   *{max-width:100%;box-sizing:border-box}
   .ctr,.ff-wrap,.ft-in{width:100%;overflow:hidden}
-  section,.target,.benefici,.trust,.sproof,.icone,.fform,.servizi,.proc,.cta-mid,.hero{overflow:hidden}
+  section,.target,.benefici,.trust,.sproof,.icone,.fform,.servizi,.proc,.cta-mid{overflow:hidden}
   .bfx-stage{overflow:hidden}
   /* ghost texts clipped to viewport */
   .tg-ghost,.sp-ghost,.trust-ghost,.cta-mid-ghost{overflow:hidden;max-width:100vw;white-space:nowrap}
@@ -2145,7 +2150,7 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
 
   /* ── Hero subtitle: clamp to 2 lines on mobile ── */
   .hero-sub{
-    font-size:12.5px;line-height:1.5;margin-bottom:16px;
+    font-size:13px;line-height:1.5;margin-bottom:14px;
     display:-webkit-box;-webkit-line-clamp:2;
     -webkit-box-orient:vertical;overflow:hidden
   }
@@ -2448,11 +2453,16 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
   </div>
 </div>
 
+<!-- ═══ ABOVE FOLD: hero + strip = esattamente 100vh ═══ -->
+<div class="above-fold">
+
 <!-- ═══ HERO ═══ -->
 <section class="hero">
-  <!-- background image -->
+  <!-- background video -->
   <div class="hero-bg" aria-hidden="true">
-    <img src="Hero section1.webp" alt="">
+    <video autoplay muted loop playsinline preload="auto" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block">
+      <source src="Videopmi.mp4" type="video/mp4">
+    </video>
   </div>
 
   <div class="hero-glow" aria-hidden="true"></div>
@@ -2636,6 +2646,8 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
   </div>
 </div>
 
+</div><!-- /above-fold -->
+
 <!-- ═══ TARGET + SOLUZIONE ═══ -->
 <section class="target" id="target">
   <div class="tg-ghost" aria-hidden="true">FARE DA SOLI.</div>
@@ -2706,7 +2718,6 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
                 <li><span class="tg-pain-icon">✕</span>Nessun referente fisso sul tuo brand</li>
                 <li><span class="tg-pain-icon">✕</span>Risultati difficili da misurare</li>
               </ul>
-              <p class="target-italic">Non serve fare di più. Serve farlo meglio.</p>
               <a class="btn bf btn-lg flip-cta" onclick="event.stopPropagation();document.getElementById('flipCard').classList.add('flipped')">Scopri la soluzione <span class="arr">›</span></a>
             </div>
 
@@ -3152,17 +3163,17 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
       <!-- Tab bar -->
       <div class="cs-tabs-wrap">
         <div class="cs-tabs" role="tablist">
-          <button class="cs-tab is-active" role="tab" data-cs="hdl" aria-selected="true">
-            <span class="cs-tab-text">HDL Milano</span>
-          </button>
-          <button class="cs-tab" role="tab" data-cs="fragi" aria-selected="false">
-            <span class="cs-tab-text">Fragi</span>
+          <button class="cs-tab is-active" role="tab" data-cs="abc" aria-selected="true">
+            <span class="cs-tab-text">ABCtools</span>
           </button>
           <button class="cs-tab" role="tab" data-cs="family" aria-selected="false">
             <span class="cs-tab-text">The Family</span>
           </button>
-          <button class="cs-tab" role="tab" data-cs="abc" aria-selected="false">
-            <span class="cs-tab-text">ABCtools</span>
+          <button class="cs-tab" role="tab" data-cs="fragi" aria-selected="false">
+            <span class="cs-tab-text">Fragi</span>
+          </button>
+          <button class="cs-tab" role="tab" data-cs="hdl" aria-selected="false">
+            <span class="cs-tab-text">HDL Milano</span>
           </button>
         </div>
       </div>
@@ -3170,52 +3181,27 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
       <!-- Panels -->
       <div class="cs-panels">
 
-        <!-- HDL Milano -->
-        <div class="cs-panel is-active" data-cs="hdl" role="tabpanel">
+        <!-- ABCtools -->
+        <div class="cs-panel is-active" data-cs="abc" role="tabpanel">
           <div class="cs-panel-img">
-            <img src="fotocase/hdl.webp" alt="HDL Milano" loading="lazy">
+            <img src="fotocase/abctools.png" alt="ABCtools" loading="lazy">
           </div>
           <div class="cs-panel-right">
             <div class="cs-panel-body">
               <div class="cs-panel-logo">
-                <img src="Loghi/hdllogo.webp" alt="HDL Milano" loading="lazy">
+                <img src="Loghi/abctools.webp" alt="ABCtools" loading="lazy">
               </div>
-              <span class="cs-badge-plain">FASHION · LUXURY · BRAND BUILDING</span>
-              <h4 class="cs-panel-title">Un brand fashion milanese che si racconta con eleganza</h4>
-              <p class="cs-panel-desc">Identità editoriale e strategia di contenuto per un marchio fashion di fascia alta: shooting coordinati, campagne Meta e presenza organica costruita per parlare al cliente giusto con il tono giusto.</p>
+              <span class="cs-badge-plain">B2B · UTENSILI · PERFORMANCE MEDIA</span>
+              <h4 class="cs-panel-title">Il catalogo tecnico che diventa motore di vendita</h4>
+              <p class="cs-panel-desc">Campagne performance e presenza digitale per un distributore B2B di utensili: dalla strategia al media buying, ogni euro investito tracciato e ottimizzato per massimizzare il ritorno sull'investimento.</p>
               <div class="cs-foot cs-tags">
-                <span>Fashion</span><span>Brand identity</span><span>Meta Ads</span><span>Editorial</span>
+                <span>B2B</span><span>Media buying</span><span>Retargeting</span><span>ROI</span>
               </div>
             </div>
             <div class="cs-kpi-row">
-              <div class="cs-kpi-card"><span class="cs-kv">+280%</span><span class="cs-kl">Reach organica in 8 mesi</span></div>
-              <div class="cs-kpi-card"><span class="cs-kv">×3.1</span><span class="cs-kl">ROAS medio campagne</span></div>
-              <div class="cs-kpi-card"><span class="cs-kv">Full</span><span class="cs-kl">Brand + performance coordinati</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Fragi -->
-        <div class="cs-panel" data-cs="fragi" role="tabpanel">
-          <div class="cs-panel-img">
-            <img src="fotocase/fragi.webp" alt="Fragi" loading="lazy">
-          </div>
-          <div class="cs-panel-right">
-            <div class="cs-panel-body">
-              <div class="cs-panel-logo">
-                <img src="Loghi/FRAGI.webp" alt="Fragi" loading="lazy">
-              </div>
-              <span class="cs-badge-plain">FASHION · MENSWEAR · E-COMMERCE</span>
-              <h4 class="cs-panel-title">Stile maschile che diventa desiderio digitale</h4>
-              <p class="cs-panel-desc">Strategia creativa e ADV per un brand menswear: shooting editoriali, content piano mensile e campagne Meta ottimizzate per acquisizione e fidelizzazione di una clientela maschile esigente.</p>
-              <div class="cs-foot cs-tags">
-                <span>Menswear</span><span>Content</span><span>Meta Ads</span><span>E-commerce</span>
-              </div>
-            </div>
-            <div class="cs-kpi-row">
-              <div class="cs-kpi-card"><span class="cs-kv">+190%</span><span class="cs-kl">Vendite online anno su anno</span></div>
-              <div class="cs-kpi-card"><span class="cs-kv">×2.5</span><span class="cs-kl">ROAS campagne Meta</span></div>
-              <div class="cs-kpi-card"><span class="cs-kv">12 mesi</span><span class="cs-kl">Crescita continuativa</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">125€</span><span class="cs-kl">Di ritorno per ogni € investito</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">6 mesi</span><span class="cs-kl">Durata della campagna</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">Full-funnel</span><span class="cs-kl">Copertura, traffico, retargeting</span></div>
             </div>
           </div>
         </div>
@@ -3245,27 +3231,52 @@ footer{background:var(--K3);padding:48px 0 22px;border-top:1px solid rgba(255,25
           </div>
         </div>
 
-        <!-- ABCtools -->
-        <div class="cs-panel" data-cs="abc" role="tabpanel">
+        <!-- Fragi -->
+        <div class="cs-panel" data-cs="fragi" role="tabpanel">
           <div class="cs-panel-img">
-            <img src="fotocase/abctools.png" alt="ABCtools" loading="lazy">
+            <img src="fotocase/fragi.webp" alt="Fragi" loading="lazy">
           </div>
           <div class="cs-panel-right">
             <div class="cs-panel-body">
               <div class="cs-panel-logo">
-                <img src="Loghi/abctools.webp" alt="ABCtools" loading="lazy">
+                <img src="Loghi/FRAGI.webp" alt="Fragi" loading="lazy">
               </div>
-              <span class="cs-badge-plain">B2B · UTENSILI · PERFORMANCE MEDIA</span>
-              <h4 class="cs-panel-title">Il catalogo tecnico che diventa motore di vendita</h4>
-              <p class="cs-panel-desc">Campagne performance e presenza digitale per un distributore B2B di utensili: dalla strategia al media buying, ogni euro investito tracciato e ottimizzato per massimizzare il ritorno sull'investimento.</p>
+              <span class="cs-badge-plain">FASHION · MENSWEAR · E-COMMERCE</span>
+              <h4 class="cs-panel-title">Stile maschile che diventa desiderio digitale</h4>
+              <p class="cs-panel-desc">Strategia creativa e ADV per un brand menswear: shooting editoriali, content piano mensile e campagne Meta ottimizzate per acquisizione e fidelizzazione di una clientela maschile esigente.</p>
               <div class="cs-foot cs-tags">
-                <span>B2B</span><span>Media buying</span><span>Retargeting</span><span>ROI</span>
+                <span>Menswear</span><span>Content</span><span>Meta Ads</span><span>E-commerce</span>
               </div>
             </div>
             <div class="cs-kpi-row">
-              <div class="cs-kpi-card"><span class="cs-kv">125€</span><span class="cs-kl">Di ritorno per ogni € investito</span></div>
-              <div class="cs-kpi-card"><span class="cs-kv">6 mesi</span><span class="cs-kl">Durata della campagna</span></div>
-              <div class="cs-kpi-card"><span class="cs-kv">Full-funnel</span><span class="cs-kl">Copertura, traffico, retargeting</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">+190%</span><span class="cs-kl">Vendite online anno su anno</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">×2.5</span><span class="cs-kl">ROAS campagne Meta</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">12 mesi</span><span class="cs-kl">Crescita continuativa</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HDL Milano -->
+        <div class="cs-panel" data-cs="hdl" role="tabpanel">
+          <div class="cs-panel-img">
+            <img src="fotocase/hdl.webp" alt="HDL Milano" loading="lazy">
+          </div>
+          <div class="cs-panel-right">
+            <div class="cs-panel-body">
+              <div class="cs-panel-logo">
+                <img src="Loghi/hdllogo.webp" alt="HDL Milano" loading="lazy">
+              </div>
+              <span class="cs-badge-plain">FASHION · LUXURY · BRAND BUILDING</span>
+              <h4 class="cs-panel-title">Un brand fashion milanese che si racconta con eleganza</h4>
+              <p class="cs-panel-desc">Identità editoriale e strategia di contenuto per un marchio fashion di fascia alta: shooting coordinati, campagne Meta e presenza organica costruita per parlare al cliente giusto con il tono giusto.</p>
+              <div class="cs-foot cs-tags">
+                <span>Fashion</span><span>Brand identity</span><span>Meta Ads</span><span>Editorial</span>
+              </div>
+            </div>
+            <div class="cs-kpi-row">
+              <div class="cs-kpi-card"><span class="cs-kv">+280%</span><span class="cs-kl">Reach organica in 8 mesi</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">×3.1</span><span class="cs-kl">ROAS medio campagne</span></div>
+              <div class="cs-kpi-card"><span class="cs-kv">Full</span><span class="cs-kl">Brand + performance coordinati</span></div>
             </div>
           </div>
         </div>
